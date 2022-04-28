@@ -37,7 +37,7 @@
                 class="form-control"
                 placeholder="Seu Telefone"
                 v-model="tel"
-                maxlength="14"
+                v-mask="'(##)9####-####'"
               />
               <p class="danger" v-for="error in errors" :key="error">
                 {{ error }}
@@ -49,7 +49,9 @@
         </div>
         <!-- Tabela -->
         <div class="list-group col">
-          <p v-if="lista.length <= 0">Sem Cadastros...</p>
+          <span class="text-center pt-3" v-if="lista.length <= 0"
+            >Sem Cadastros...</span
+          >
           <table class="table" border="0">
             <tr class="text-center" v-if="lista.length > 0">
               <th>Nome</th>
@@ -123,7 +125,7 @@ export default {
     },
     removeComment(index) {
       console.log(index);
-      this.lista.splice(index,1); 
+      this.lista.splice(index, 1);
     },
   },
   computed: {
