@@ -37,34 +37,50 @@
                 class="form-control"
                 placeholder="Seu Telefone"
                 v-model="tel"
-              />          <p style="color: red" v-for="error in errors" :key="error">
-            {{ error }}
-          </p>
-
+                maxlength="14"
+              />
+              <p class="danger" v-for="error in errors" :key="error">
+                {{ error }}
+              </p>
             </div>
             <br />
-            <!-- <button type="submit" class="btn btn-primary">Cadastrar</button> -->
             <button class="btn btn-primary" type="submit">Enviar</button>
           </form>
         </div>
         <!-- Tabela -->
-        <div class="col-6">
-          <br />
-          <p>{{ nome }}</p>
-          <p>{{ email }}</p>
-          <p>{{ tel }}</p>
-          <!-- <table border="1">
-                   <tr class="text-center">
-                       <th>nome</th>
-                       <th>email</th>
-                       <th>Telefone</th>
-                   </tr>
-                   <tr class="text-center">
-                       <td>henriquepig@hotmail.com</td>
-                       <td>123455*</td>
-                       <td>(27) 99965-0933</td>
-                   </tr>
-               </table> -->
+        <div class="list-group col">
+          <p v-if="lista.length <= 0">Sem Cadastros...</p>
+          <table class="table" border="0">
+            <tr class="text-center" v-if="lista.length > 0">
+              <th>Nome</th>
+              <th>Email</th>
+              <th>Telefone</th>
+              <th></th>
+              <th></th>
+            </tr>
+            <tr
+              class="text-center"
+              v-for="(lista, index) in allComments"
+              :key="lista"
+            >
+              <td>{{ lista.nome }}</td>
+              <td>{{ lista.email }}</td>
+              <td>{{ lista.tel }}</td>
+              <td>
+                <button class="btn btn-custom btn-sm">
+                  <i class="bi bi-pencil-square"></i> Editar
+                </button>
+              </td>
+              <td>
+                <a
+                  href="#"
+                  class="btn btn-custom btn-sm"
+                  v-on:click.prevent="removeComment(index)"
+                  ><i class="bi bi-x-lg"></i> Excluir</a
+                >
+              </td>
+            </tr>
+          </table>
         </div>
       </div>
     </div>
@@ -75,15 +91,16 @@
 export default {
   data() {
     return {
+      lista: [],
       nome: "",
       email: "",
       tel: "",
       errors: [],
     };
   },
-  methods: {      
+  methods: {
     checkForm: function () {
-        this.errors=[];
+      this.errors = [];
       if (this.nome === "") {
         this.errors.push("Campo Nome Obrigatorio");
       }
@@ -93,9 +110,27 @@ export default {
       if (this.tel === "") {
         this.errors.push("Campo Tel Obrigatorio");
       }
-      if(this.nome&&this.email&&this.tel){
-         alert("todos estão completos");
+      if (this.nome && this.email && this.tel) {
+        this.lista.push({
+          nome: this.nome,
+          email: this.email,
+          tel: this.tel,
+        });
+        this.nome = "";
+        this.email = "";
+        this.tel = "";
       }
+    },
+    removeComment(index) {
+      console.log(index);
+      this.lista.splice(index,1); 
+    },
+  },
+  computed: {
+    allComments() {
+      return this.lista.map((lista) => ({
+        ...lista,
+      }));
     },
   },
 };
@@ -103,6 +138,6 @@ export default {
 
 <style>
 .danger {
-  border: 1px solid red !important;
+  color: red !important;
 }
 </style>
