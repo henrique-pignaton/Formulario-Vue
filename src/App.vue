@@ -54,7 +54,7 @@
           >
           <table class="table" border="0">
             <tr class="text-center" v-if="lista.length > 0">
-              <th>#</th>
+              <th>#id</th>
               <th>Nome</th>
               <th>Email</th>
               <th>Telefone</th>
@@ -101,7 +101,8 @@ export default {
       email: "",
       tel: "",
       errors: [],
-      id: 1,
+      id: 0,
+      Editindex:0,
     };
   },
   methods: {
@@ -126,19 +127,17 @@ export default {
         this.nome = "";
         this.email = "";
         this.tel = "";
-        this.id = this.id++
       }
     },
     removercomentario(index) {
-      console.log(index);
       this.lista.splice(index, 1);
     },
     editarCadastro(index){
       this.Editindex = index;
-      console.log()
       this.nome = this.lista[index].nome;
       this.email = this.lista[index].email;
       this.tel = this.lista[index].tel;
+      console.log(Editindex)
     }
   },
 };
