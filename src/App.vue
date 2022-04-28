@@ -37,7 +37,7 @@
                 class="form-control"
                 placeholder="Seu Telefone"
                 v-model="tel"
-                v-mask="'(##)9####-####'"
+                v-mask="'(##)#####-####'"
               />
               <p class="danger" v-for="error in errors" :key="error">
                 {{ error }}
@@ -54,6 +54,7 @@
           >
           <table class="table" border="0">
             <tr class="text-center" v-if="lista.length > 0">
+              <th>#</th>
               <th>Nome</th>
               <th>Email</th>
               <th>Telefone</th>
@@ -62,23 +63,25 @@
             </tr>
             <tr
               class="text-center"
-              v-for="(lista, index) in allComments"
+              v-for="(lista, index) in lista"
               :key="lista"
             >
+              <td>{{lista.id}}</td>
               <td>{{ lista.nome }}</td>
               <td>{{ lista.email }}</td>
               <td>{{ lista.tel }}</td>
               <td>
-                <button class="btn btn-custom btn-sm">
+                <button class="btn btn-custom btn-sm"
+                  v-on:click.prevent="editarCadastro(index)">
                   <i class="bi bi-pencil-square"></i> Editar
                 </button>
               </td>
               <td>
-                <a
+                <button
                   href="#"
                   class="btn btn-custom btn-sm"
-                  v-on:click.prevent="removeComment(index)"
-                  ><i class="bi bi-x-lg"></i> Excluir</a
+                  v-on:click.prevent="removercomentario(index)"
+                  ><i class="bi bi-x-lg"></i> Excluir</button
                 >
               </td>
             </tr>
@@ -98,6 +101,7 @@ export default {
       email: "",
       tel: "",
       errors: [],
+      id: 1,
     };
   },
   methods: {
@@ -117,23 +121,25 @@ export default {
           nome: this.nome,
           email: this.email,
           tel: this.tel,
+          id: this.id++
         });
         this.nome = "";
         this.email = "";
         this.tel = "";
+        this.id = this.id++
       }
     },
-    removeComment(index) {
+    removercomentario(index) {
       console.log(index);
       this.lista.splice(index, 1);
     },
-  },
-  computed: {
-    allComments() {
-      return this.lista.map((lista) => ({
-        ...lista,
-      }));
-    },
+    editarCadastro(index){
+      this.Editindex = index;
+      console.log()
+      this.nome = this.lista[index].nome;
+      this.email = this.lista[index].email;
+      this.tel = this.lista[index].tel;
+    }
   },
 };
 </script>
