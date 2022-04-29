@@ -1,11 +1,16 @@
 <template>
   <div id="app">
     <div class="container mt-5 col-12">
-      <h1 class="mb-3 text-center">Cadastro de Usuario</h1>
+      <h1 class="mb-3 text-center branco">Cadastro de Usuario</h1>
       <div class="row">
         <!-- Formulario -->
         <div class="col-6">
-          <form action="" name="formulario" v-on:submit.prevent="checkForm">
+          <form
+            action=""
+            class="branco"
+            name="formulario"
+            v-on:submit.prevent="checkForm"
+          >
             <div class="form-group">
               <label for="nome">Nome:</label>
               <input
@@ -48,41 +53,42 @@
           </form>
         </div>
         <!-- Tabela -->
-        <div class="list-group col">
-          <span class="text-center pt-3" v-if="lista.length <= 0"
+        <div class="list-group branco col">
+          <span class="text-center pt-3 branco" v-if="lista.length <= 0"
             >Sem Cadastros...</span
           >
-          <table class="table" border="0">
+          <table class="table branco" border="0">
             <tr class="text-center" v-if="lista.length > 0">
               <th>#id</th>
               <th>Nome</th>
               <th>Email</th>
               <th>Telefone</th>
-              <th></th>
-              <th></th>
             </tr>
             <tr
               class="text-center"
               v-for="(lista, index) in lista"
               :key="lista"
             >
-              <td>{{lista.id}}</td>
+              <td>{{ lista.id }}</td>
               <td>{{ lista.nome }}</td>
               <td>{{ lista.email }}</td>
               <td>{{ lista.tel }}</td>
               <td>
-                <button class="btn btn-custom btn-sm"
-                  v-on:click.prevent="editarCadastro(index)">
+                <button
+                  class="btn branco btn-custom btn-sm"
+                  v-on:click.prevent="editarCadastro(index)"
+                >
                   <i class="bi bi-pencil-square"></i> Editar
                 </button>
               </td>
               <td>
                 <button
                   href="#"
-                  class="btn btn-custom btn-sm"
+                  class="btn branco btn-custom btn-sm"
                   v-on:click.prevent="removercomentario(index)"
-                  ><i class="bi bi-x-lg"></i> Excluir</button
                 >
+                  <i class="bi bi-x-lg"></i> Excluir
+                </button>
               </td>
             </tr>
           </table>
@@ -102,7 +108,7 @@ export default {
       tel: "",
       errors: [],
       id: 0,
-      Editindex:0,
+      Editindex: "",
     };
   },
   methods: {
@@ -122,23 +128,24 @@ export default {
           nome: this.nome,
           email: this.email,
           tel: this.tel,
-          id: this.id++
+          id: this.id++,
         });
         this.nome = "";
         this.email = "";
         this.tel = "";
+        this.Editindex=""
       }
     },
     removercomentario(index) {
       this.lista.splice(index, 1);
     },
-    editarCadastro(index){
-      this.Editindex = index;
+    editarCadastro(index) {
+      this.Editindex = [index];
       this.nome = this.lista[index].nome;
       this.email = this.lista[index].email;
       this.tel = this.lista[index].tel;
-      console.log(Editindex)
-    }
+      console.log(Editindex);
+    },
   },
 };
 </script>
@@ -146,5 +153,22 @@ export default {
 <style>
 .danger {
   color: red !important;
+}
+body {
+  background-color: rgb(46, 46, 46);
+}
+.branco {
+  color: aliceblue;
+}
+input:focus {
+  color: red;
+}
+@media (max-width: 992px) {
+  body {
+    align-items: center;
+  }
+  .col-6 {
+    width: 100% !important;
+  }
 }
 </style>
