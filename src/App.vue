@@ -102,7 +102,7 @@
 export default {
   data() {
     return {
-      lista: [],
+      lista: [{"nome":"Provident consequat","email":"xagatil@mailinator.com","tel":"(11)64977-1178","id":4},{"nome":"Laborum eligendi eos","email":"talyne@mailinator.com","tel":"(18)42784-9355","id":5},{"nome":"Quo corporis recusan","email":"gepys@mailinator.com","tel":"(16)92941-1788","id":10},{"nome":"Sed incidunt amet ","email":"xygabiba@mailinator.com","tel":"(18)28994-5456","id":11},{"nome":"Vero perferendis ips","email":"jati@mailinator.com","tel":"(16)97868-8662","id":12},{"nome":"Irure nisi proident","email":"cerog@mailinator.com","tel":"(14)04725-1794","id":13}],
       nome: "",
       email: "",
       tel: "",
@@ -114,6 +114,7 @@ export default {
   methods: {
     checkForm: function () {
       this.errors = [];
+      
       if (this.nome === "") {
         this.errors.push("Campo Nome Obrigatorio");
       }
@@ -123,7 +124,7 @@ export default {
       if (this.tel === "") {
         this.errors.push("Campo Tel Obrigatorio");
       }
-      if (this.nome && this.email && this.tel) {
+      if (this.nome!= ""&& this.email!="" && this.tel!="") {
         this.lista.push({
           nome: this.nome,
           email: this.email,
@@ -145,7 +146,7 @@ export default {
       this.email = this.lista[index].email;
       this.tel = this.lista[index].tel;
       console.log(Editindex);
-    },
+    },if(Editindex)
   },
 };
 </script>
