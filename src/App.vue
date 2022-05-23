@@ -108,7 +108,7 @@ export default {
       tel: "",
       errors: [],
       id: 0,
-      Editindex: "",
+
     };
   },
   methods: {
@@ -134,7 +134,7 @@ export default {
         this.nome = "";
         this.email = "";
         this.tel = "";
-        this.Editindex=""
+        
       }
     },
     removercomentario(index) {
@@ -145,8 +145,8 @@ export default {
       this.nome = this.lista[index].nome;
       this.email = this.lista[index].email;
       this.tel = this.lista[index].tel;
-      console.log(Editindex);
-    },if(Editindex)
+      
+    }
   },
 };
 </script>
